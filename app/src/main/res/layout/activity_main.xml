@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.sum.titlebar.TitleBar
+        android:id="@+id/title_bar"
+        app:tb_background_drawable="@drawable/title_background"
+        app:tb_background_color="@color/white"
+        app:tb_icon_back="@mipmap/back"
+        app:tb_text_back="返回"
+        app:tb_title_color="@color/black"
+        app:tb_title_text_size="18sp"
+        app:tb_text_title="标题"
+        app:tb_icon_action="@mipmap/glass_gray"
+        app:tb_text_action="保存"
+        app:tb_text_action_color="@color/red"
+        app:tb_text_action_text_size="14sp"
+        app:tb_divider_drawable="@drawable/line"
+        app:tb_divider_color="@color/red"
+        app:tb_divider_visible="visible"
+        app:tb_can_finish_activity="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+</LinearLayout>
