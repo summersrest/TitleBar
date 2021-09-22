@@ -43,7 +43,7 @@ implementation 'com.github.summersrest:TitleBar:Tag'
 ```java
 titleBar
 	//返回按钮图片
-	.setBackIconDrawable(ContextCompat.getDrawable(this, R.mipmap.back_white))
+	.setBackIcon(ContextCompat.getDrawable(this, R.mipmap.back_white))
 	.setBackIconResource(R.mipmap.back_white)
 	//返回文字
 	.setBackText("返回")
@@ -61,12 +61,12 @@ titleBar
 	//右侧按钮字体颜色
 	.setActionTextColor(R.color.black)
 	//右侧按钮图片
-	//.setActionIconDrawable(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
+	//.setActionIcon(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
 	//.setActionIconResource(R.mipmap.glass_gray)
 	//底部分割线颜色
 	.setDividerColor(ContextCompat.getColor(this, R.color.red))
 	//底部分割线背景图（会覆盖背景颜色）
-	.setDividerDrawable(ContextCompat.getDrawable(this, R.drawable.line))
+	.setDivider(ContextCompat.getDrawable(this, R.drawable.line))
 	.setDividerBackgroundResource(R.drawable.line)
 	//标题栏透明的
 	.setBackgroundAlpha(255)
@@ -97,24 +97,24 @@ titleBar
 可以在`Application`中统一设置样式属性
 ```java
 TitleBar.getDefaultBuilder()
-          //返回按钮图片
-          .setBackIcon(R.mipmap.back_white)
-          //返回文字
-          .setBackText("返回")
-          //标题栏背景颜色
-          .setTitleBarBackgroundColor(ContextCompat.getColor(this, R.color.red))
-          //标题栏背景图（会覆盖背景色）
-          .setTitleBarBackground(ContextCompat.getDrawable(this, R.drawable.title_background))
-          //标题字体颜色
-          .setTitleColor(getColor(R.color.white))
-          //右侧按钮字体颜色
-          .setActionTextColor(R.color.black)
-          //底部分割线颜色
-          .setDiverColor(ContextCompat.getColor(this, R.color.red))
-          //底部分割线背景图（会覆盖背景颜色）
-          .setDiverDrawable(ContextCompat.getDrawable(this, R.drawable.line))
-          //底部分割线是否显示
-          .setDiverVisible(TitleBar.VISIBLE);
+	//返回按钮图片
+	.setBackIcon(R.mipmap.back_white)
+	//返回文字
+	.setBackText("返回")
+	//标题栏背景颜色
+	.setTitleBarBackgroundColor(ContextCompat.getColor(this, R.color.red))
+	//标题栏背景图（会覆盖背景色）
+	.setTitleBarBackground(ContextCompat.getDrawable(this, R.drawable.title_background))
+	//标题字体颜色
+	.setTitleColor(getColor(R.color.white))
+	//右侧按钮字体颜色
+	.setActionTextColor(R.color.black)
+	//底部分割线颜色
+	.setDiverColor(ContextCompat.getColor(this, R.color.red))
+	//底部分割线背景图（会覆盖背景颜色）
+	.setDiver(ContextCompat.getDrawable(this, R.drawable.line))
+	//底部分割线是否显示
+	.setDiverVisible(TitleBar.VISIBLE);
 ```
 ## **3、备注**
 > 1、标题栏背景图与底部分割线背景图会覆盖掉背景色，也就是如果设置了背景图，再设置背景色无效。    
