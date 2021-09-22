@@ -5,6 +5,8 @@
         <attr name="tb_background_color" format="reference|color|integer" />
         <!-- titleBar背景图 -->
         <attr name="tb_background_drawable" format="reference"/>
+        <!-- titleBar背景透明度 -->
+        <attr name="tb_background_alpha" format="integer"/>
         <!-- 回退按钮图片 -->
         <attr name="tb_icon_back" format="reference" />
         <!-- 回退按钮文字 -->

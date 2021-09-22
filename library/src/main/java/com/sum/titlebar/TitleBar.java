@@ -131,6 +131,10 @@ public class TitleBar extends RelativeLayout {
             }
             viewBinding.toolbar.setBackgroundColor(backgroundColor);
         }
+        //背景透明度
+        int alpha = typedArray.getInteger(R.styleable.TitleBar_tb_background_alpha, 255);
+        viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+        viewBinding.iconLine.getBackground().mutate().setAlpha(alpha);
         /******回退按钮图片*******/
         //xml中设置的回退按钮
 //        int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_icon_back, R.mipmap.back);
