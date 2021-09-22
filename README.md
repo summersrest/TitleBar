@@ -12,7 +12,7 @@ allprojects {
 ```
 2.添加
 ```java
-implementation 'com.github.summersrest:TitleBar:Tag'
+implementation 'com.github.summersrest:TitleBar:v1.0.3'
 ```
 ## **2、使用**
 ### 1、xml中使用
