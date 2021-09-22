@@ -34,6 +34,8 @@
             <enum name="visible" value="1" />
             <enum name="gone" value="2" />
         </attr>
+        <!-- 分割线是否显示透明度 -->
+        <attr name="tb_divider_alpha" format="integer"/>
         <!-- 点击返回按钮是否关闭当前activity -->
         <attr name="tb_can_finish_activity" format="boolean"/>
     </declare-styleable>

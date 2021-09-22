@@ -134,7 +134,6 @@ public class TitleBar extends RelativeLayout {
         //背景透明度
         int alpha = typedArray.getInteger(R.styleable.TitleBar_tb_background_alpha, 255);
         viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
-        viewBinding.iconLine.getBackground().mutate().setAlpha(alpha);
         /******回退按钮图片*******/
         //xml中设置的回退按钮
 //        int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_icon_back, R.mipmap.back);
@@ -256,6 +255,10 @@ public class TitleBar extends RelativeLayout {
         } else {
             viewBinding.iconLine.setVisibility(View.GONE);
         }
+        //分割线透明度
+        int alphaDivider = typedArray.getInteger(R.styleable.TitleBar_tb_divider_alpha, 255);
+        viewBinding.iconLine.getBackground().mutate().setAlpha(alphaDivider);
+
         //点击返回按钮是否关闭当前activity
         autoFinishAct = typedArray.getBoolean(R.styleable.TitleBar_tb_can_finish_activity, true);
 
@@ -464,6 +467,27 @@ public class TitleBar extends RelativeLayout {
      */
     public TitleBar setBackgroundAlpha(int alpha) {
         viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+        return this;
+    }
+
+    /**
+     * 设置TitleBar背景与底部分割线透明度
+     *
+     * @param alpha 0 ~ 255
+     * @return
+     */
+    public TitleBar setBackgroundAndDividerAlpha(int alpha) {
+        viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+        viewBinding.iconLine.getBackground().mutate().setAlpha(alpha);
+        return this;
+    }
+
+    /**
+     * 设置底部分割线透明度
+     * @param alpha
+     * @return
+     */
+    public TitleBar setDividerAlpha(int alpha) {
         viewBinding.iconLine.getBackground().mutate().setAlpha(alpha);
         return this;
     }
