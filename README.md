@@ -59,8 +59,8 @@ titleBar
         //右侧按钮字体颜色
         .setActionTextColor(R.color.black)
         //右侧按钮图片
-//                .setActionIconDrawable(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
-//                .setActionIconResource(R.mipmap.glass_gray)
+	//.setActionIconDrawable(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
+	//.setActionIconResource(R.mipmap.glass_gray)
         //底部分割线颜色
         .setDividerColor(ContextCompat.getColor(this, R.color.red))
         //底部分割线背景图（会覆盖背景颜色）
@@ -88,7 +88,7 @@ titleBar
         });
 ```
 ### 3、设置全局默认属性
-可以在`Application`中设置统一设置样式属性
+可以在`Application`中统一设置样式属性
 ```java
 TitleBar.getDefaultBuilder()
           //返回按钮图片
