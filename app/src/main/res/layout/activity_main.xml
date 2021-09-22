@@ -23,6 +23,8 @@
         app:tb_divider_color="@color/red"
         app:tb_divider_visible="visible"
         app:tb_can_finish_activity="true"
+        app:tb_divider_alpha="255"
+        app:tb_background_alpha="255"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"/>
 

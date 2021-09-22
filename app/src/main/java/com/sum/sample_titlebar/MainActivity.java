@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         titleBar
                 //返回按钮图片
-                .setBackIconDrawable(ContextCompat.getDrawable(this, R.mipmap.back_white))
+                .setBackIcon(ContextCompat.getDrawable(this, R.mipmap.back_white))
                 .setBackIconResource(R.mipmap.back_white)
                 //返回文字
                 .setBackText("返回")
@@ -40,15 +40,19 @@ public class MainActivity extends AppCompatActivity {
                 //右侧按钮字体颜色
                 .setActionTextColor(R.color.black)
                 //右侧按钮图片
-//                .setActionIconDrawable(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
-//                .setActionIconResource(R.mipmap.glass_gray)
+                //.setActionIcon(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
+                //.setActionIconResource(R.mipmap.glass_gray)
                 //底部分割线颜色
                 .setDividerColor(ContextCompat.getColor(this, R.color.red))
                 //底部分割线背景图（会覆盖背景颜色）
-                .setDividerDrawable(ContextCompat.getDrawable(this, R.drawable.line))
+                .setDivider(ContextCompat.getDrawable(this, R.drawable.line))
                 .setDividerBackgroundResource(R.drawable.line)
                 //标题栏透明的
                 .setBackgroundAlpha(255)
+                //分割线透明度
+                .setDividerAlpha(255)
+                //分割线与标题栏透明度
+                .setBackgroundAndDividerAlpha(255)
                 //底部分割线是否显示
                 .setDividerVisible(TitleBar.VISIBLE)
                 //点击返回按钮是否关闭activity

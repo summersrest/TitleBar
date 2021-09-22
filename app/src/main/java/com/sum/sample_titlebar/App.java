@@ -34,7 +34,7 @@ public class App extends Application {
                 //底部分割线颜色
                 .setDiverColor(ContextCompat.getColor(this, R.color.red))
                 //底部分割线背景图（会覆盖背景颜色）
-                .setDiverDrawable(ContextCompat.getDrawable(this, R.drawable.line))
+                .setDiver(ContextCompat.getDrawable(this, R.drawable.line))
                 //底部分割线是否显示
                 .setDiverVisible(TitleBar.VISIBLE);
     }

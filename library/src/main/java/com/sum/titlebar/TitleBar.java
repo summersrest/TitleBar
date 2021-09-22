@@ -11,7 +11,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import com.sum.titlebar.databinding.ViewTitleBarBinding;
 
 /**
@@ -19,7 +19,7 @@ import com.sum.titlebar.databinding.ViewTitleBarBinding;
  * created at: 2021/9/22 9:24
  * Desc: 自定义title
  */
-public class TitleBar extends RelativeLayout {
+public class TitleBar extends LinearLayout {
     private ViewTitleBarBinding viewBinding;
     /**
      * 分割线显示
@@ -322,7 +322,7 @@ public class TitleBar extends RelativeLayout {
      * @param drawable
      * @return
      */
-    public TitleBar setBackIconDrawable(Drawable drawable) {
+    public TitleBar setBackIcon(Drawable drawable) {
         viewBinding.iconBack.setImageDrawable(drawable);
         return this;
     }
@@ -399,7 +399,7 @@ public class TitleBar extends RelativeLayout {
      * @param drawable
      * @return
      */
-    public TitleBar setActionIconDrawable(Drawable drawable) {
+    public TitleBar setActionIcon(Drawable drawable) {
         viewBinding.ivAction.setBackground(drawable);
         return this;
     }
@@ -432,7 +432,7 @@ public class TitleBar extends RelativeLayout {
      * @param drawable
      * @return
      */
-    public TitleBar setDividerDrawable(Drawable drawable) {
+    public TitleBar setDivider(Drawable drawable) {
         viewBinding.iconLine.setBackground(drawable);
         return this;
     }
@@ -610,7 +610,7 @@ public class TitleBar extends RelativeLayout {
          * @param drawable
          * @return
          */
-        public DefaultBuilder setDiverDrawable(Drawable drawable) {
+        public DefaultBuilder setDiver(Drawable drawable) {
             defaultDividerDrawable = drawable;
             return this;
         }
