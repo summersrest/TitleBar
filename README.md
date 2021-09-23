@@ -49,11 +49,34 @@ implementation 'com.github.summersrest:TitleBar:v1.0.3'
         app:tb_title_text_size="18sp" />
 ```
 ### Attributes
-| name  | format   | description | 
-| ------------- |:-------------:| -----:| 
-| tb_background_color  | reference |titleBar背景色 
-| tb_background_drawable  | reference  |titleBar背景图 
-| tb_background_alpha | integer  |titleBar背景透明度(0~255) 
+|name|format|description|
+|:---:|:---:|:---:|
+| tb_background_color  | reference |titleBar背景色
+| tb_background_drawable  | reference  |titleBar背景图(覆盖背景色)
+| tb_background_alpha | integer  |titleBar背景透明度(0~255)
+| tb_icon_back | reference  |回退按钮图片
+| tb_icon_back_width | dimension  |回退按钮图片宽度
+| tb_icon_back_height | dimension  |回退按钮图片高度
+| tb_text_back | string  |回退按钮文字
+| tb_title | string  |标题文字
+| tb_title_color | color  |标题文字颜色
+| tb_title_text_size | dimension  |标题文字字体大小
+| tb_text_action | string  |右侧按钮文字
+| tb_text_action_color | color  |右侧按钮文字颜色
+| tb_text_action_text_size | dimension  |右侧按钮文字大小
+| tb_action_width | dimension  |右侧按钮宽度
+| tb_action_height | dimension  |右侧按钮高度
+| tb_action_marginEnd | dimension  |右侧按钮距离右边侧距离
+| tb_action_background | reference  |右侧按钮背景
+| tb_icon_action | reference  |右侧按钮内部显示图片
+| tb_icon_action_width | dimension  |右侧按钮图片宽度
+| tb_icon_action_height | dimension  |右侧按钮图片高度
+| tb_divider_color | color  |底部分割线颜色
+| tb_divider_drawable | reference  |底部分割线背景图（覆盖背景色）
+| tb_divider_size | dimension  |底部分割线高度
+| tb_divider_visible | visible/gone  |底部分割线是否显示
+| tb_divider_alpha | integer  |底部分割线透明度(0~255)
+| tb_can_finish_activity | boolean  |点击返回按钮是否关闭当前activity
 ### 2、代码中设置样式属性
 ```java
 titleBar
