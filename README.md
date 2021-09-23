@@ -48,6 +48,12 @@ implementation 'com.github.summersrest:TitleBar:v1.0.3'
         app:tb_title_color="@color/black"
         app:tb_title_text_size="18sp" />
 ```
+### Attributes
+| name  | format   | description | 
+| ------------- |:-------------:| -----:| 
+| tb_background_color  | reference|color|integer | titleBar背景色 | 
+| tb_background_drawable  | reference  | titleBar背景图 | 
+| tb_background_alpha | integer  | titleBar背景透明度(0~255) | 
 ### 2、代码中设置样式属性
 ```java
 titleBar
@@ -134,12 +140,7 @@ TitleBar.getDefaultBuilder()
 	//底部分割线是否显示
 	.setDividerVisible(TitleBar.VISIBLE);
 ```
-### 3、属性表
-| Tables  | Are   | Cool | 
-| ------------- |:-------------:| -----:| 
-| col 3 is  | right-aligned | $1600 | 
-| col 2 is  | centered  | $12 | 
-| zebra stripes | are neat  | $1 | 
+
 ## **3、备注**
 > 1、标题栏背景图与底部分割线背景图会覆盖掉背景色，也就是如果设置了背景图，再设置背景色无效。    
 > 2、样式设置优先级：代码>xml>全局。代码中未设置样式属性，以xml中设置的样式为准，代码与xml中都未设置，以Applicaion中设置的全局默认样式属性为准。  
