@@ -51,9 +51,9 @@ implementation 'com.github.summersrest:TitleBar:v1.0.3'
 ### Attributes
 | name  | format   | description | 
 | ------------- |:-------------:| -----:| 
-| tb_background_color  | reference|color|integer | titleBar背景色 | 
-| tb_background_drawable  | reference  | titleBar背景图 | 
-| tb_background_alpha | integer  | titleBar背景透明度(0~255) | 
+| tb_background_color  | reference | titleBar背景色 
+| tb_background_drawable  | reference  | titleBar背景图 
+| tb_background_alpha | integer  | titleBar背景透明度(0~255) 
 ### 2、代码中设置样式属性
 ```java
 titleBar
