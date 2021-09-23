@@ -19,26 +19,34 @@ implementation 'com.github.summersrest:TitleBar:v1.0.3'
 ```xml
 <com.sum.titlebar.TitleBar
         android:id="@+id/title_bar"
-        app:tb_background_drawable="@drawable/title_background"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:tb_action_background="@drawable/btn_orange"
+        app:tb_action_height="40dp"
+        app:tb_action_marginEnd="10dp"
+        app:tb_action_width="80dp"
+        app:tb_background_alpha="255"
         app:tb_background_color="@color/white"
-        app:tb_icon_back="@mipmap/back"
-        app:tb_text_back="返回"
-        app:tb_title_color="@color/black"
-        app:tb_title_text_size="18sp"
-        app:tb_title="标题"
+        app:tb_background_drawable="@drawable/title_background"
+        app:tb_can_finish_activity="true"
+        app:tb_divider_alpha="255"
+        app:tb_divider_color="@color/red"
+        app:tb_divider_drawable="@drawable/line"
+        app:tb_divider_size="2dp"
+        app:tb_divider_visible="visible"
         app:tb_icon_action="@mipmap/glass_gray"
+        app:tb_icon_action_height="10dp"
+        app:tb_icon_action_width="10dp"
+        app:tb_icon_back="@mipmap/back"
+        app:tb_icon_back_height="20dp"
+        app:tb_icon_back_width="30dp"
         app:tb_text_action="保存"
         app:tb_text_action_color="@color/red"
         app:tb_text_action_text_size="14sp"
-        app:tb_divider_drawable="@drawable/line"
-        app:tb_divider_color="@color/red"
-        app:tb_divider_visible="visible"
-        app:tb_can_finish_activity="true"
-        app:tb_divider_alpha="255"
-        app:tb_background_alpha="255"
-        app:tb_divider_size = "30dp"
-        android:layout_width="match_parent"
-	android:layout_height="?actionBarSize"/>
+        app:tb_text_back="返回"
+        app:tb_title="标题"
+        app:tb_title_color="@color/black"
+        app:tb_title_text_size="18sp" />
 ```
 ### 2、代码中设置样式属性
 ```java
@@ -62,8 +70,10 @@ titleBar
 	//右侧按钮字体颜色
 	.setActionTextColor(R.color.black)
 	//右侧按钮图片
-	//.setActionIcon(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
-	//.setActionIconResource(R.mipmap.glass_gray)
+	.setActionIcon(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
+	.setActionIconResource(R.mipmap.glass_gray)
+	//右侧按钮是否显示
+	.setActionVisible(false)
 	//底部分割线颜色
 	.setDividerColor(ContextCompat.getColor(this, R.color.red))
 	//底部分割线背景图（会覆盖背景颜色）
@@ -102,6 +112,9 @@ titleBar
 TitleBar.getDefaultBuilder()
 	//返回按钮图片
 	.setBackIcon(R.mipmap.back_white)
+	//返回按钮尺寸
+	.setBackIconWidth(30)
+	.setBackIconHeight(20)
 	//返回文字
 	.setBackText("返回")
 	//标题栏背景颜色
