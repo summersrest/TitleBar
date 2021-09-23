@@ -76,6 +76,17 @@ implementation 'com.github.summersrest:TitleBar:v1.0.3'
 | tb_divider_size | dimension  |底部分割线高度
 | tb_divider_visible | visible/gone  |底部分割线是否显示
 | tb_divider_alpha | integer  |底部分割线透明度(0~255)
+| tb_show_input_box | boolean  |是否显示输入框（输入框显示则不显示标题）
+| tb_input_background | reference  |输入框背景
+| tb_input_width | dimension  |输入框宽度
+| tb_input_height | dimension  |输入框高度
+| tb_input_text_color | color  |输入框文字颜色
+| tb_input_text_size | dimension  |输入框文字大小
+| tb_input_text | string  |输入框文字
+| tb_input_hint | string  |输入框提示文字
+| tb_input_draw | reference  |输入框左侧小图片
+| tb_input_draw_width | dimension  |输入框左侧小图片宽度
+| tb_input_draw_height | dimension  |输入框左侧小图片高度
 | tb_can_finish_activity | boolean  |点击返回按钮是否关闭当前activity
 ### 2、代码中设置样式属性
 ```java
@@ -120,6 +131,8 @@ titleBar
 	.setDividerSize(MainActivity.this, 2f)
 	//点击返回按钮是否关闭activity
 	.setCanFinishActivity(true)
+	//输入框提示文字
+	.setInputHint("请输入车牌号")
 	//返回按钮点击事件
 	.setOnBackClickListener(new OnBackClickListener() {
 	    @Override
@@ -134,6 +147,18 @@ titleBar
 		Toast.makeText(MainActivity.this, "右侧按钮点击事件", Toast.LENGTH_SHORT).show();
 	    }
 	});
+
+
+//设置输入框文字
+titleBar.setInputText("输入框文字");
+//设置输入框提示文字
+titleBar.setInputHint("请输入车牌号");
+//获取输入框控件
+EditText editText = titleBar.getEditText();
+//获取输入框中的文字
+String content = titleBar.getInputText();
+//清空输入框
+titleBar.clearInput();
 ```
 ### 3、设置全局默认属性
 可以在`Application`中统一设置样式属性
