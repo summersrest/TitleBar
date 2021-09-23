@@ -11,7 +11,11 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
 import com.sum.titlebar.databinding.ViewTitleBarBinding;
 
 /**
@@ -19,7 +23,8 @@ import com.sum.titlebar.databinding.ViewTitleBarBinding;
  * created at: 2021/9/22 9:24
  * Desc: 自定义title
  */
-public class TitleBar extends LinearLayout {
+public class TitleBar extends FrameLayout {
+    private static final String TAG = "green";
     private ViewTitleBarBinding viewBinding;
     /**
      * 分割线显示
@@ -42,9 +47,24 @@ public class TitleBar extends LinearLayout {
     private static int defaultTitleBackgroundColor;
 
     /**
+     * 全局默认标题栏高度
+     */
+    private static int defaultTitleSize;
+
+    /**
      * 全局默认返回按钮
      */
     private static int defaultBackIcon;
+
+    /**
+     * 全局默认返回按钮宽度
+     */
+    private static int defaultBackIconWidth;
+
+    /**
+     * 全局默认返回按钮高度
+     */
+    private static int defaultBackIconHeight;
 
     /**
      * 全局默认返回文字
@@ -77,6 +97,11 @@ public class TitleBar extends LinearLayout {
     private static int defaultDividerColor;
 
     /**
+     * 全局默认分割线高度
+     */
+    private static int defaultDividerSize;
+
+    /**
      * 返回按钮监听事件
      */
     private OnBackClickListener onBackClickListener;
@@ -100,6 +125,7 @@ public class TitleBar extends LinearLayout {
     public TitleBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
     private void initView(Context context, AttributeSet attrs) {
         LayoutInflater inflater = LayoutInflater.from(context);
         viewBinding = ViewTitleBarBinding.inflate(inflater, this, true);
@@ -114,29 +140,37 @@ public class TitleBar extends LinearLayout {
         }
         //设置titleBar背景图
         if (null != backgroundDrawable) {
-            viewBinding.toolbar.setBackground(backgroundDrawable);
+            setBackground(backgroundDrawable);
         } else {
             //若未设置过背景图，设置背景色
             //xml中设置的背景色
-//            int backgroundColor = typedArray.getColor(R.styleable.TitleBar_tb_background_color, Color.parseColor("#FFFFFF"));
             int backgroundColor = typedArray.getColor(R.styleable.TitleBar_tb_background_color, 0);
             //xml中未设置背景色，取全局默认的背景色
             if (0 == backgroundColor) {
                 backgroundColor = defaultTitleBackgroundColor;
-                Log.i("green", defaultTitleBackgroundColor + "");
             }
             //未设置过全局默认背景色,默认设置为白色
             if (0 == backgroundColor) {
                 backgroundColor = Color.parseColor("#FFFFFF");
             }
-            viewBinding.toolbar.setBackgroundColor(backgroundColor);
+            setBackgroundColor(backgroundColor);
         }
         //背景透明度
         int alpha = typedArray.getInteger(R.styleable.TitleBar_tb_background_alpha, 255);
-        viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+        getBackground().mutate().setAlpha(alpha);
+        //标题栏高度
+        int titleHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_title_bar_size, 0);
+        //全局设置
+        if (0 == titleHeight) {
+            titleHeight = WorkUtils.dip2px(context, defaultTitleSize);
+        }
+        //全部未设置，设置一个默认值
+        if (0 == titleHeight) {
+            titleHeight = WorkUtils.dip2px(context, 60f);
+        }
+        WorkUtils.setViewSize(viewBinding.titleLayout, ViewGroup.LayoutParams.MATCH_PARENT, titleHeight);
         /******回退按钮图片*******/
         //xml中设置的回退按钮
-//        int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_icon_back, R.mipmap.back);
         int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_icon_back, 0);
         //xml中未设置，取全局默认按钮
         if (0 == backIcon) {
@@ -147,7 +181,7 @@ public class TitleBar extends LinearLayout {
             backIcon = R.mipmap.back;
         }
         viewBinding.iconBack.setImageResource(backIcon);
-        /******回退按钮图片*******/
+        /******回退按钮文字*******/
         //xml中设置
         String backText = typedArray.getString(R.styleable.TitleBar_tb_text_back);
         //xml中未设置取全局设置
@@ -159,36 +193,105 @@ public class TitleBar extends LinearLayout {
             backText = "";
         }
         viewBinding.tvBack.setText(backText);
-        /******标题文字*******/
-        //标题文字
-        String titleText = typedArray.getString(R.styleable.TitleBar_tb_text_title);
-        if (!TextUtils.isEmpty(titleText)) {
-            viewBinding.tvTitle.setText(titleText);
-        }
-        /******标题文字*******/
-        //xml中取值
-//        int titleColor = typedArray.getColor(R.styleable.TitleBar_tb_title_color, Color.parseColor("#22293A"));
-        int titleColor = typedArray.getColor(R.styleable.TitleBar_tb_title_color, 0);
+        //回退按钮宽度
+        //xml中设置
+        int backIconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_back_width, 0);
         //全局设置
-        if (0 == titleColor) {
-            titleColor = defaultTitleColor;
+        if (0 == backIconWidth) {
+            backIconWidth = WorkUtils.dip2px(context, defaultBackIconWidth);
         }
-        //均未设置
-        if (0 == titleColor) {
-            titleColor = Color.parseColor("#22293A");
+        //均未设置，设置一个默认值
+        if (0 == backIconWidth) {
+            backIconWidth = WorkUtils.dip2px(context, 30);
         }
-        viewBinding.tvTitle.setTextColor(titleColor);
-        /******标题文字大小*******/
-        int titleTextSizeSizeDefault = getResources().getDimensionPixelSize(R.dimen.title_text_size);
-        float titleTextSize = typedArray.getDimension(R.styleable.TitleBar_tb_title_text_size, titleTextSizeSizeDefault);
-        viewBinding.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
+        //回退按钮高度
+        //xml中设置
+        int backIconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_back_height, 0);
+        //全局设置
+        if (0 == backIconHeight) {
+            backIconHeight = WorkUtils.dip2px(context, defaultBackIconHeight);
+        }
+        //均未设置设置一个默认值
+        if (0 == backIconHeight) {
+            backIconHeight = WorkUtils.dip2px(context, 20);
+        }
+        //设置回退按钮尺寸
+        WorkUtils.setViewSize(viewBinding.iconBack, backIconWidth, backIconHeight);
+        //显示标题还是输入框？
+        if (typedArray.getBoolean(R.styleable.TitleBar_tb_show_input_box, false)) {
+            //显示输入框
+            viewBinding.etLayout.setVisibility(View.VISIBLE);
+            viewBinding.tvTitle.setVisibility(View.GONE);
+            //输入框文字
+            String inputText = typedArray.getString(R.styleable.TitleBar_tb_input_text);
+            if (!TextUtils.isEmpty(inputText)) {
+                viewBinding.etSearch.setText(inputText);
+            }
+            //输入框提示文字
+            String inputHint = typedArray.getString(R.styleable.TitleBar_tb_input_hint);
+            if (!TextUtils.isEmpty(inputHint)) {
+                viewBinding.etSearch.setHint(inputHint);
+            }
+            //输入框文字颜色
+            int etColor = typedArray.getColor(R.styleable.TitleBar_tb_input_text_color, Color.parseColor("#22293A"));
+            viewBinding.etSearch.setTextColor(etColor);
+            //输入框文字大小
+            int etTextSizeDefault = getResources().getDimensionPixelSize(R.dimen.input_text_size);
+            float etTextSize = typedArray.getDimension(R.styleable.TitleBar_tb_input_text_size, etTextSizeDefault);
+            viewBinding.etSearch.setTextSize(TypedValue.COMPLEX_UNIT_PX, etTextSize);
+            //输入框背景图
+            int etBackground = typedArray.getResourceId(R.styleable.TitleBar_tb_input_background, R.drawable.bg_default_et);
+            viewBinding.etLayout.setBackgroundResource(etBackground);
+            //设置大小
+            int etWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_width, WorkUtils.dip2px(context, 240));
+            int etHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_height, WorkUtils.dip2px(context, 40));
+            WorkUtils.setViewSize(viewBinding.etLayout, etWidth, etHeight);
+            //输入框前的图标
+            int drawStart = typedArray.getResourceId(R.styleable.TitleBar_tb_input_draw, 0);
+            if (0 != drawStart) {
+                viewBinding.ivEtStart.setVisibility(View.VISIBLE);
+                //设置图片
+                viewBinding.ivEtStart.setImageResource(drawStart);
+                //设置大小
+                int drawWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_draw_width, WorkUtils.dip2px(context, 20));
+                int drawHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_draw_height, WorkUtils.dip2px(context, 20));
+                WorkUtils.setViewSize(viewBinding.ivEtStart, drawWidth, drawHeight);
+            } else {
+                viewBinding.ivEtStart.setVisibility(View.GONE);
+            }
+        } else {
+            //显示标题
+            viewBinding.etLayout.setVisibility(View.GONE);
+            viewBinding.tvTitle.setVisibility(View.VISIBLE);
+            /******标题文字*******/
+            //标题文字
+            String titleText = typedArray.getString(R.styleable.TitleBar_tb_title);
+            if (!TextUtils.isEmpty(titleText)) {
+                viewBinding.tvTitle.setText(titleText);
+            }
+            /******标题文字颜色*******/
+            //xml中取值
+            int titleColor = typedArray.getColor(R.styleable.TitleBar_tb_title_color, 0);
+            //全局设置
+            if (0 == titleColor) {
+                titleColor = defaultTitleColor;
+            }
+            //均未设置
+            if (0 == titleColor) {
+                titleColor = Color.parseColor("#22293A");
+            }
+            viewBinding.tvTitle.setTextColor(titleColor);
+            /******标题文字大小*******/
+            int titleTextSizeDefault = getResources().getDimensionPixelSize(R.dimen.title_text_size);
+            float titleTextSize = typedArray.getDimension(R.styleable.TitleBar_tb_title_text_size, titleTextSizeDefault);
+            viewBinding.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
+        }
         //右侧事件文字
         String actionText = typedArray.getString(R.styleable.TitleBar_tb_text_action);
         if (!TextUtils.isEmpty(actionText)) {
             viewBinding.tvAction.setVisibility(View.VISIBLE);
             viewBinding.tvAction.setText(actionText);
             //右侧文字颜色
-//            int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_text_action_color, Color.parseColor("#22293A"));
             //xml设置
             int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_text_action_color, 0);
             //全局设置
@@ -212,8 +315,38 @@ public class TitleBar extends LinearLayout {
         if (null != actionIcon) {
             viewBinding.ivAction.setVisibility(View.VISIBLE);
             viewBinding.ivAction.setBackground(actionIcon);
+            //图片宽度
+            int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_width, WorkUtils.dip2px(context, 20));
+            //图片高度
+            int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_height, WorkUtils.dip2px(context, 20));
+            //设置图片尺寸
+            WorkUtils.setViewSize(viewBinding.ivAction, iconWidth, iconHeight);
         } else {
             viewBinding.ivAction.setVisibility(View.GONE);
+        }
+        //按钮背景
+        Drawable btnDrawable = typedArray.getDrawable(R.styleable.TitleBar_tb_action_background);
+        if (null != btnDrawable) {
+            viewBinding.btnAction.setBackground(btnDrawable);
+        }
+        //右侧按钮图片与文字均未设置，则隐藏按钮
+        if (TextUtils.isEmpty(actionText) && null == actionIcon && null == btnDrawable) {
+            viewBinding.btnAction.setVisibility(View.GONE);
+        } else {
+            viewBinding.btnAction.setVisibility(View.VISIBLE);
+            //按钮宽度
+            int btnWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_width, 0);
+            if (0 == btnWidth) {
+                btnWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
+            }
+            //按钮高度
+            int btnHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_height, 0);
+            if (0 == btnHeight) {
+                btnHeight = ViewGroup.LayoutParams.MATCH_PARENT;
+            }
+            //按钮与右边距
+            int div = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_marginEnd, 0);
+            WorkUtils.setViewSize(viewBinding.btnAction, btnWidth, btnHeight, div);
         }
         /******分割线是否显示*******/
         //xml中设置
@@ -252,6 +385,19 @@ public class TitleBar extends LinearLayout {
                 }
                 viewBinding.iconLine.setBackgroundColor(lineColor);
             }
+            /********分割线高度********/
+            //xml中设置
+            int dividerHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_divider_size, 0);
+            //全局设置
+            if (0 == dividerHeight) {
+                dividerHeight = WorkUtils.dip2px(context, defaultDividerSize);
+            }
+            //全部未设置，设置一个默认值
+            if (0 == dividerHeight) {
+                dividerHeight = WorkUtils.dip2px(context, 1f);
+            }
+            //设置分割线高度
+            WorkUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
         } else {
             viewBinding.iconLine.setVisibility(View.GONE);
         }
@@ -271,7 +417,7 @@ public class TitleBar extends LinearLayout {
                     onBackClickListener.onClick(v);
                 }
                 if (autoFinishAct) {
-                    ((Activity)context).finish();
+                    ((Activity) context).finish();
                 }
             }
         });
@@ -292,7 +438,7 @@ public class TitleBar extends LinearLayout {
      * @param backgroundColor
      */
     public TitleBar setTitleBarBackgroundColor(int backgroundColor) {
-        viewBinding.toolbar.setBackgroundColor(backgroundColor);
+        setBackgroundColor(backgroundColor);
         return this;
     }
 
@@ -302,7 +448,7 @@ public class TitleBar extends LinearLayout {
      * @param drawable
      */
     public TitleBar setTitleBarBackground(Drawable drawable) {
-        viewBinding.toolbar.setBackground(drawable);
+        setBackground(drawable);
         return this;
     }
 
@@ -312,7 +458,7 @@ public class TitleBar extends LinearLayout {
      * @param resource
      */
     public TitleBar setTitleBarBackgroundResource(int resource) {
-        viewBinding.toolbar.setBackgroundResource(resource);
+        setBackgroundResource(resource);
         return this;
     }
 
@@ -416,6 +562,17 @@ public class TitleBar extends LinearLayout {
     }
 
     /**
+     * 右侧按钮是否显示
+     *
+     * @param visible
+     * @return
+     */
+    public TitleBar setActionVisible(boolean visible) {
+        viewBinding.btnAction.setVisibility(visible ? View.VISIBLE : View.GONE);
+        return this;
+    }
+
+    /**
      * 设置分割线颜色
      *
      * @param color
@@ -443,7 +600,7 @@ public class TitleBar extends LinearLayout {
      * @param resource
      * @return
      */
-    public TitleBar setDividerBackgroundResource(int resource) {
+    public TitleBar setDividerResource(int resource) {
         viewBinding.iconLine.setBackgroundResource(resource);
         return this;
     }
@@ -460,13 +617,24 @@ public class TitleBar extends LinearLayout {
     }
 
     /**
+     * 设置分割线高度
+     *
+     * @param size
+     * @return
+     */
+    public TitleBar setDividerSize(Context context, float size) {
+        WorkUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, WorkUtils.dip2px(context, size));
+        return this;
+    }
+
+    /**
      * 设置TitleBar背景透明度
      *
      * @param alpha 0 ~ 255
      * @return
      */
     public TitleBar setBackgroundAlpha(int alpha) {
-        viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+        getBackground().mutate().setAlpha(alpha);
         return this;
     }
 
@@ -477,13 +645,60 @@ public class TitleBar extends LinearLayout {
      * @return
      */
     public TitleBar setBackgroundAndDividerAlpha(int alpha) {
-        viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+//        viewBinding.toolbar.getBackground().mutate().setAlpha(alpha);
+        getBackground().mutate().setAlpha(alpha);
         viewBinding.iconLine.getBackground().mutate().setAlpha(alpha);
         return this;
     }
 
     /**
+     * 设置输入框文字
+     *
+     * @param text
+     */
+    public void setInputText(String text) {
+        viewBinding.etSearch.setText(text);
+    }
+
+    /**
+     * 获取输入框中的文字
+     *
+     * @return
+     */
+    public String getInputText() {
+        return viewBinding.etSearch.getText().toString().trim();
+    }
+
+    /**
+     * 获取输入框EditText
+     *
+     * @return
+     */
+    public EditText getEditText() {
+        return viewBinding.etSearch;
+    }
+
+    /**
+     * 清空输入框
+     */
+    public void clearInput() {
+        viewBinding.etSearch.setText("");
+    }
+
+    /**
+     * 设置输入框提示文字
+     *
+     * @param hint
+     * @return
+     */
+    public TitleBar setInputHint(String hint) {
+        viewBinding.etSearch.setHint(hint);
+        return this;
+    }
+
+    /**
      * 设置底部分割线透明度
+     *
      * @param alpha
      * @return
      */
@@ -494,6 +709,7 @@ public class TitleBar extends LinearLayout {
 
     /**
      * 返回按钮监听事件
+     *
      * @param onBackClickListener
      * @return
      */
@@ -504,6 +720,7 @@ public class TitleBar extends LinearLayout {
 
     /**
      * 右侧按钮点击事件
+     *
      * @param onActionClickListener
      * @return
      */
@@ -514,6 +731,7 @@ public class TitleBar extends LinearLayout {
 
     /**
      * 点击返回按钮是否关闭当前Activity
+     *
      * @param isFinish
      * @return
      */
@@ -551,6 +769,17 @@ public class TitleBar extends LinearLayout {
         }
 
         /**
+         * 标题栏默认高度（不包括分割线高度，单纯标题栏的高度）
+         *
+         * @param height
+         * @return
+         */
+        public DefaultBuilder setTitleBarHeight(int height) {
+            defaultTitleSize = height;
+            return this;
+        }
+
+        /**
          * 设置全局默认返回按钮
          *
          * @param resource
@@ -558,6 +787,28 @@ public class TitleBar extends LinearLayout {
          */
         public DefaultBuilder setBackIcon(int resource) {
             defaultBackIcon = resource;
+            return this;
+        }
+
+        /**
+         * 设置全局默认返回按钮宽度
+         *
+         * @param width
+         * @return
+         */
+        public DefaultBuilder setBackIconWidth(int width) {
+            defaultBackIconWidth = width;
+            return this;
+        }
+
+        /**
+         * 设置全局默认返回按钮高度
+         *
+         * @param height
+         * @return
+         */
+        public DefaultBuilder setBackIconHeight(int height) {
+            defaultBackIconHeight = height;
             return this;
         }
 
@@ -585,6 +836,7 @@ public class TitleBar extends LinearLayout {
 
         /**
          * 设置右侧按钮默认文字颜色
+         *
          * @param color
          * @return
          */
@@ -599,7 +851,7 @@ public class TitleBar extends LinearLayout {
          * @param visible
          * @return
          */
-        public DefaultBuilder setDiverVisible(int visible) {
+        public DefaultBuilder setDividerVisible(int visible) {
             defaultDriverVisible = visible;
             return this;
         }
@@ -610,7 +862,7 @@ public class TitleBar extends LinearLayout {
          * @param drawable
          * @return
          */
-        public DefaultBuilder setDiver(Drawable drawable) {
+        public DefaultBuilder setDivider(Drawable drawable) {
             defaultDividerDrawable = drawable;
             return this;
         }
@@ -621,8 +873,19 @@ public class TitleBar extends LinearLayout {
          * @param color
          * @return
          */
-        public DefaultBuilder setDiverColor(int color) {
+        public DefaultBuilder setDividerColor(int color) {
             defaultDividerColor = color;
+            return this;
+        }
+
+        /**
+         * 全局设置分割线高度
+         *
+         * @param height
+         * @return
+         */
+        public DefaultBuilder setDividerHeight(int height) {
+            defaultDividerSize = height;
             return this;
         }
     }

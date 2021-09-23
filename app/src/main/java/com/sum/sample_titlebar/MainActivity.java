@@ -1,18 +1,18 @@
 package com.sum.sample_titlebar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sum.titlebar.OnActionClickListener;
 import com.sum.titlebar.OnBackClickListener;
 import com.sum.titlebar.TitleBar;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
                 //右侧按钮字体颜色
                 .setActionTextColor(R.color.black)
                 //右侧按钮图片
-                //.setActionIcon(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
-                //.setActionIconResource(R.mipmap.glass_gray)
+                .setActionIcon(ContextCompat.getDrawable(this, R.mipmap.glass_gray))
+                .setActionIconResource(R.mipmap.glass_gray)
+                //右侧按钮是否显示
+                .setActionVisible(false)
                 //底部分割线颜色
                 .setDividerColor(ContextCompat.getColor(this, R.color.red))
                 //底部分割线背景图（会覆盖背景颜色）
                 .setDivider(ContextCompat.getDrawable(this, R.drawable.line))
-                .setDividerBackgroundResource(R.drawable.line)
+                .setDividerResource(R.drawable.line)
                 //标题栏透明的
                 .setBackgroundAlpha(255)
                 //分割线透明度
@@ -55,8 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 .setBackgroundAndDividerAlpha(255)
                 //底部分割线是否显示
                 .setDividerVisible(TitleBar.VISIBLE)
+                //底部分割线高度
+                .setDividerSize(MainActivity.this, 2f)
                 //点击返回按钮是否关闭activity
                 .setCanFinishActivity(true)
+                //输入框提示文字
+                .setInputHint("请输入车牌号")
                 //返回按钮点击事件
                 .setOnBackClickListener(new OnBackClickListener() {
                     @Override
@@ -71,5 +77,17 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "右侧按钮点击事件", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
+        //设置输入框文字
+        titleBar.setInputText("输入框文字");
+        //设置输入框提示文字
+        titleBar.setInputHint("请输入车牌号");
+        //获取输入框控件
+        EditText editText = titleBar.getEditText();
+        //获取输入框中的文字
+        String content = titleBar.getInputText();
+        //清空输入框
+        titleBar.clearInput();
     }
 }

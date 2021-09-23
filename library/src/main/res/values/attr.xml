@@ -7,12 +7,18 @@
         <attr name="tb_background_drawable" format="reference"/>
         <!-- titleBar背景透明度 -->
         <attr name="tb_background_alpha" format="integer"/>
+        <!-- 标题栏高度（不包括分割线高度，与分割线高度分别计算） -->
+        <attr name="tb_title_bar_size" format="dimension"/>
         <!-- 回退按钮图片 -->
         <attr name="tb_icon_back" format="reference" />
+        <!-- 回退按钮图片宽度 -->
+        <attr name="tb_icon_back_width" format="dimension" />
+        <!-- 回退按钮图片高度 -->
+        <attr name="tb_icon_back_height" format="dimension" />
         <!-- 回退按钮文字 -->
         <attr name="tb_text_back" format="string" />
         <!-- 标题文字 -->
-        <attr name="tb_text_title" format="string" />
+        <attr name="tb_title" format="string" />
         <!-- 标题文字颜色 -->
         <attr name="tb_title_color" format="reference|color|integer"/>
         <!-- 标题文字字体大小 -->
@@ -25,10 +31,24 @@
         <attr name="tb_text_action_text_size" format="dimension"/>
         <!-- 右侧事件图片 -->
         <attr name="tb_icon_action" format="reference" />
+        <!-- 右侧事件图片宽度 -->
+        <attr name="tb_icon_action_width" format="dimension" />
+        <!-- 右侧事件图片高度 -->
+        <attr name="tb_icon_action_height" format="dimension" />
+        <!-- 右侧按钮宽度 -->
+        <attr name="tb_action_width" format="dimension" />
+        <!-- 右侧按钮高度 -->
+        <attr name="tb_action_height" format="dimension" />
+        <!-- 右侧按钮距离右边侧距离 -->
+        <attr name="tb_action_marginEnd" format="dimension" />
+        <!-- 右侧事件背景 -->
+        <attr name="tb_action_background" format="reference" />
         <!-- 分割线颜色 -->
         <attr name="tb_divider_color" format="reference|color|integer"/>
         <!-- 分割线图片 -->
         <attr name="tb_divider_drawable" format="reference"/>
+        <!-- 分割线高度 -->
+        <attr name="tb_divider_size" format="dimension"/>
         <!-- 分割线是否显示 -->
         <attr name="tb_divider_visible" >
             <enum name="visible" value="1" />
@@ -36,6 +56,28 @@
         </attr>
         <!-- 分割线是否显示透明度 -->
         <attr name="tb_divider_alpha" format="integer"/>
+        <!-- 是否显示输入框 -->
+        <attr name="tb_show_input_box" format="boolean"/>
+        <!-- 输入框背景 -->
+        <attr name="tb_input_background" format="reference"/>
+        <!-- 输入框宽度 -->
+        <attr name="tb_input_width" format="dimension"/>
+        <!-- 输入框高度 -->
+        <attr name="tb_input_height" format="dimension"/>
+        <!-- 输入框文字颜色 -->
+        <attr name="tb_input_text_color" format="reference|color|integer"/>
+        <!-- 输入框字体大小 -->
+        <attr name="tb_input_text_size" format="dimension"/>
+        <!-- 输入框文字 -->
+        <attr name="tb_input_text" format="string" />
+        <!-- 输入框提示文字 -->
+        <attr name="tb_input_hint" format="string" />
+        <!-- 输入框左侧图片 -->
+        <attr name="tb_input_draw" format="reference"/>
+        <!-- 输入框左侧图片宽度 -->
+        <attr name="tb_input_draw_width" format="dimension"/>
+        <!-- 输入框左侧图片高度 -->
+        <attr name="tb_input_draw_height" format="dimension"/>
         <!-- 点击返回按钮是否关闭当前activity -->
         <attr name="tb_can_finish_activity" format="boolean"/>
     </declare-styleable>

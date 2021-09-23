@@ -21,6 +21,9 @@ public class App extends Application {
         TitleBar.getDefaultBuilder()
                 //返回按钮图片
                 .setBackIcon(R.mipmap.back_white)
+                //返回按钮尺寸
+                .setBackIconWidth(30)
+                .setBackIconHeight(20)
                 //返回文字
                 .setBackText("返回")
                 //标题栏背景颜色
@@ -32,10 +35,14 @@ public class App extends Application {
                 //右侧按钮字体颜色
                 .setActionTextColor(R.color.black)
                 //底部分割线颜色
-                .setDiverColor(ContextCompat.getColor(this, R.color.red))
+                .setDividerColor(ContextCompat.getColor(this, R.color.red))
                 //底部分割线背景图（会覆盖背景颜色）
-                .setDiver(ContextCompat.getDrawable(this, R.drawable.line))
+                .setDivider(ContextCompat.getDrawable(this, R.drawable.line))
+                //设置标题栏高度（标题栏高度不包含分割线的高度）
+                .setTitleBarHeight(60)
+                //设置分割线高度
+                .setDividerHeight(2)
                 //底部分割线是否显示
-                .setDiverVisible(TitleBar.VISIBLE);
+                .setDividerVisible(TitleBar.VISIBLE);
     }
 }
