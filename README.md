@@ -60,6 +60,7 @@ implementation 'com.github.summersrest:TitleBar:v1.0.3'
 | tb_background_color  | reference |titleBar背景色
 | tb_background_drawable  | reference  |titleBar背景图(覆盖背景色)
 | tb_background_alpha | integer  |titleBar背景透明度(0~255)
+| tb_title_bar_size | dimension  |标题栏高度（不包括分割线高度，与分割线高度分别计算）
 | tb_icon_back | reference  |回退按钮图片
 | tb_icon_back_width | dimension  |回退按钮图片宽度
 | tb_icon_back_height | dimension  |回退按钮图片高度
@@ -189,6 +190,8 @@ TitleBar.getDefaultBuilder()
 	.setDividerColor(ContextCompat.getColor(this, R.color.red))
 	//底部分割线背景图（会覆盖背景颜色）
 	.setDivider(ContextCompat.getDrawable(this, R.drawable.line))
+	//设置标题栏高度（标题栏高度不包含分割线的高度）
+        .setTitleBarHeight(60)
 	//设置分割线高度
 	.setDividerSize(2)
 	//底部分割线是否显示
@@ -198,3 +201,4 @@ TitleBar.getDefaultBuilder()
 ## **3、备注**
 > 1、标题栏背景图与底部分割线背景图会覆盖掉背景色，也就是如果设置了背景图，再设置背景色无效。    
 > 2、样式设置优先级：代码>xml>全局。代码中未设置样式属性，以xml中设置的样式为准，代码与xml中都未设置，以Applicaion中设置的全局默认样式属性为准。  
+> 3、标题栏的整体高度为 标题栏高度+分割线高度，即整体高度为 **tb_title_bar_size + tb_divider_size**
