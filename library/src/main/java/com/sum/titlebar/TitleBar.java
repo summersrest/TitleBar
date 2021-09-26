@@ -163,13 +163,13 @@ public class TitleBar extends Toolbar {
         int titleHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_title_bar_size, 0);
         //全局设置
         if (0 == titleHeight) {
-            titleHeight = WorkUtils.dip2px(context, defaultTitleSize);
+            titleHeight = ToolsUtils.dip2px(context, defaultTitleSize);
         }
         //全部未设置，设置一个默认值
         if (0 == titleHeight) {
-            titleHeight = WorkUtils.dip2px(context, 60f);
+            titleHeight = ToolsUtils.dip2px(context, 60f);
         }
-        WorkUtils.setViewSize(viewBinding.titleLayout, ViewGroup.LayoutParams.MATCH_PARENT, titleHeight);
+        ToolsUtils.setViewSize(viewBinding.titleLayout, ViewGroup.LayoutParams.MATCH_PARENT, titleHeight);
         /******回退按钮图片*******/
         //xml中设置的回退按钮
         int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_icon_back, 0);
@@ -199,25 +199,25 @@ public class TitleBar extends Toolbar {
         int backIconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_back_width, 0);
         //全局设置
         if (0 == backIconWidth) {
-            backIconWidth = WorkUtils.dip2px(context, defaultBackIconWidth);
+            backIconWidth = ToolsUtils.dip2px(context, defaultBackIconWidth);
         }
         //均未设置，设置一个默认值
         if (0 == backIconWidth) {
-            backIconWidth = WorkUtils.dip2px(context, 30);
+            backIconWidth = ToolsUtils.dip2px(context, 30);
         }
         //回退按钮高度
         //xml中设置
         int backIconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_back_height, 0);
         //全局设置
         if (0 == backIconHeight) {
-            backIconHeight = WorkUtils.dip2px(context, defaultBackIconHeight);
+            backIconHeight = ToolsUtils.dip2px(context, defaultBackIconHeight);
         }
         //均未设置设置一个默认值
         if (0 == backIconHeight) {
-            backIconHeight = WorkUtils.dip2px(context, 20);
+            backIconHeight = ToolsUtils.dip2px(context, 20);
         }
         //设置回退按钮尺寸
-        WorkUtils.setViewSize(viewBinding.iconBack, backIconWidth, backIconHeight);
+        ToolsUtils.setViewSize(viewBinding.iconBack, backIconWidth, backIconHeight);
         //显示标题还是输入框？
         if (typedArray.getBoolean(R.styleable.TitleBar_tb_show_input_box, false)) {
             //显示输入框
@@ -244,9 +244,9 @@ public class TitleBar extends Toolbar {
             int etBackground = typedArray.getResourceId(R.styleable.TitleBar_tb_input_background, R.drawable.bg_default_et);
             viewBinding.etLayout.setBackgroundResource(etBackground);
             //设置大小
-            int etWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_width, WorkUtils.dip2px(context, 240));
-            int etHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_height, WorkUtils.dip2px(context, 40));
-            WorkUtils.setViewSize(viewBinding.etLayout, etWidth, etHeight);
+            int etWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_width, ToolsUtils.dip2px(context, 240));
+            int etHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_height, ToolsUtils.dip2px(context, 40));
+            ToolsUtils.setViewSize(viewBinding.etLayout, etWidth, etHeight);
             //输入框前的图标
             int drawStart = typedArray.getResourceId(R.styleable.TitleBar_tb_input_draw, 0);
             if (0 != drawStart) {
@@ -254,9 +254,9 @@ public class TitleBar extends Toolbar {
                 //设置图片
                 viewBinding.ivEtStart.setImageResource(drawStart);
                 //设置大小
-                int drawWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_draw_width, WorkUtils.dip2px(context, 20));
-                int drawHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_draw_height, WorkUtils.dip2px(context, 20));
-                WorkUtils.setViewSize(viewBinding.ivEtStart, drawWidth, drawHeight);
+                int drawWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_draw_width, ToolsUtils.dip2px(context, 20));
+                int drawHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_input_draw_height, ToolsUtils.dip2px(context, 20));
+                ToolsUtils.setViewSize(viewBinding.ivEtStart, drawWidth, drawHeight);
             } else {
                 viewBinding.ivEtStart.setVisibility(View.GONE);
             }
@@ -317,11 +317,11 @@ public class TitleBar extends Toolbar {
             viewBinding.ivAction.setVisibility(View.VISIBLE);
             viewBinding.ivAction.setBackground(actionIcon);
             //图片宽度
-            int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_width, WorkUtils.dip2px(context, 20));
+            int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_width, ToolsUtils.dip2px(context, 20));
             //图片高度
-            int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_height, WorkUtils.dip2px(context, 20));
+            int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_height, ToolsUtils.dip2px(context, 20));
             //设置图片尺寸
-            WorkUtils.setViewSize(viewBinding.ivAction, iconWidth, iconHeight);
+            ToolsUtils.setViewSize(viewBinding.ivAction, iconWidth, iconHeight);
         } else {
             viewBinding.ivAction.setVisibility(View.GONE);
         }
@@ -347,7 +347,7 @@ public class TitleBar extends Toolbar {
             }
             //按钮与右边距
             int div = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_marginEnd, 0);
-            WorkUtils.setViewSize(viewBinding.btnAction, btnWidth, btnHeight, div);
+            ToolsUtils.setViewSize(viewBinding.btnAction, btnWidth, btnHeight, div);
         }
         /******分割线是否显示*******/
         //xml中设置
@@ -391,14 +391,14 @@ public class TitleBar extends Toolbar {
             int dividerHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_divider_size, 0);
             //全局设置
             if (0 == dividerHeight) {
-                dividerHeight = WorkUtils.dip2px(context, defaultDividerSize);
+                dividerHeight = ToolsUtils.dip2px(context, defaultDividerSize);
             }
             //全部未设置，设置一个默认值
             if (0 == dividerHeight) {
-                dividerHeight = WorkUtils.dip2px(context, 1f);
+                dividerHeight = ToolsUtils.dip2px(context, 1f);
             }
             //设置分割线高度
-            WorkUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
+            ToolsUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
         } else {
             viewBinding.iconLine.setVisibility(View.GONE);
         }
@@ -418,7 +418,7 @@ public class TitleBar extends Toolbar {
                     onBackClickListener.onClick(v);
                 }
                 if (autoFinishAct) {
-                    ((Activity) context).finish();
+                    ToolsUtils.context2Activity(context).finish();
                 }
             }
         });
@@ -624,7 +624,7 @@ public class TitleBar extends Toolbar {
      * @return
      */
     public TitleBar setDividerSize(Context context, float size) {
-        WorkUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, WorkUtils.dip2px(context, size));
+        ToolsUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, ToolsUtils.dip2px(context, size));
         return this;
     }
 
