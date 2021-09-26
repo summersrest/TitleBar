@@ -7,23 +7,20 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
 import com.sum.titlebar.databinding.ViewTitleBarBinding;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * @author liujiang
  * created at: 2021/9/22 9:24
  * Desc: 自定义title
  */
-public class TitleBar extends FrameLayout {
+public class TitleBar extends Toolbar {
     private static final String TAG = "green";
     private ViewTitleBarBinding viewBinding;
     /**
@@ -131,6 +128,10 @@ public class TitleBar extends FrameLayout {
         viewBinding = ViewTitleBarBinding.inflate(inflater, this, true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
+
+        //去除toolbar前后边距
+        setContentInsetsAbsolute(0, 0);
+
         /******背景*******/
         //xml中设置的背景图
         Drawable backgroundDrawable = typedArray.getDrawable(R.styleable.TitleBar_tb_background_drawable);
