@@ -18,7 +18,7 @@ allprojects {
 ```
 2.添加
 ```java
-implementation 'com.github.summersrest:TitleBar:v1.0.4'
+implementation 'com.github.summersrest:TitleBar:v1.0.6'
 ```
 ## **2、使用**
 ### 1、xml中使用
