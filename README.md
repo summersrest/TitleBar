@@ -26,7 +26,7 @@ implementation 'com.github.summersrest:TitleBar:v1.0.7'
 <com.sum.titlebar.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         app:tb_action_background="@drawable/btn_orange"
         app:tb_action_height="40dp"
         app:tb_action_marginEnd="10dp"
@@ -202,3 +202,20 @@ TitleBar.getDefaultBuilder()
 > 1、标题栏背景图与底部分割线背景图会覆盖掉背景色，也就是如果设置了背景图，再设置背景色无效。    
 > 2、样式设置优先级：代码>xml>全局。代码中未设置样式属性，以xml中设置的样式为准，代码与xml中都未设置，以Applicaion中设置的全局默认样式属性为准。  
 > 3、标题栏的整体高度为 标题栏高度+分割线高度，即整体高度为 **tb_title_bar_size + tb_divider_size**
+> 4、标题栏tb_title_bar_size的默认高度为60dp，假如设置的整体高度小于等于60dp，并且未指定tb_title_bar_size的高度，分割线会被覆盖掉无法显示，解决办法是指定TitleBar的整体高度-tb_title_bar_size高度=分割线的高度。或者将TitleBar的高度设置为wrap_content。
+
+```xml
+<com.sum.titlebar.TitleBar
+	android:id="@+id/title_bar"
+	android:layout_width="match_parent"
+	android:layout_height="61dp"
+	app:tb_title_bar_size="60dp"
+	app:tb_divider_size="1dp"/>
+```
+或者
+```xml
+<com.sum.titlebar.TitleBar
+	android:id="@+id/title_bar"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"/>
+```
