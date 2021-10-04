@@ -69,7 +69,7 @@ implementation 'com.github.summersrest:TitleBar:v1.0.8'
 | tb_title | string  |标题文字
 | tb_title_color | color  |标题文字颜色
 | tb_title_text_size | dimension  |标题文字字体大小
-| tb_action_visible | boolean  |右侧按钮是否显示(默认不显示，设置了按钮图片或者文字后默认为显示可不设置)
+| tb_action_visible | boolean  |右侧按钮是否显示(默认不显示，设置了按钮图片或者文字后默认为显示)
 | tb_action_text | string  |右侧按钮文字
 | tb_action_text_color | color  |右侧按钮文字颜色
 | tb_action_text_size | dimension  |右侧按钮文字大小
