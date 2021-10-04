@@ -172,7 +172,7 @@ public class TitleBar extends Toolbar {
         ToolsUtils.setViewSize(viewBinding.titleLayout, ViewGroup.LayoutParams.MATCH_PARENT, titleHeight);
         /******回退按钮图片*******/
         //xml中设置的回退按钮
-        int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_icon_back, 0);
+        int backIcon = typedArray.getResourceId(R.styleable.TitleBar_tb_back_icon, 0);
         //xml中未设置，取全局默认按钮
         if (0 == backIcon) {
             backIcon = defaultBackIcon;
@@ -184,7 +184,7 @@ public class TitleBar extends Toolbar {
         viewBinding.iconBack.setImageResource(backIcon);
         /******回退按钮文字*******/
         //xml中设置
-        String backText = typedArray.getString(R.styleable.TitleBar_tb_text_back);
+        String backText = typedArray.getString(R.styleable.TitleBar_tb_back_text);
         //xml中未设置取全局设置
         if (TextUtils.isEmpty(backText)) {
             backText = defaultBackText;
@@ -196,7 +196,7 @@ public class TitleBar extends Toolbar {
         viewBinding.tvBack.setText(backText);
         //回退按钮宽度
         //xml中设置
-        int backIconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_back_width, 0);
+        int backIconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_back_icon_width, 0);
         //全局设置
         if (0 == backIconWidth) {
             backIconWidth = ToolsUtils.dip2px(context, defaultBackIconWidth);
@@ -207,7 +207,7 @@ public class TitleBar extends Toolbar {
         }
         //回退按钮高度
         //xml中设置
-        int backIconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_back_height, 0);
+        int backIconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_back_icon_height, 0);
         //全局设置
         if (0 == backIconHeight) {
             backIconHeight = ToolsUtils.dip2px(context, defaultBackIconHeight);
@@ -288,13 +288,13 @@ public class TitleBar extends Toolbar {
             viewBinding.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
         }
         //右侧事件文字
-        String actionText = typedArray.getString(R.styleable.TitleBar_tb_text_action);
+        String actionText = typedArray.getString(R.styleable.TitleBar_tb_action_text);
         if (!TextUtils.isEmpty(actionText)) {
             viewBinding.tvAction.setVisibility(View.VISIBLE);
             viewBinding.tvAction.setText(actionText);
             //右侧文字颜色
             //xml设置
-            int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_text_action_color, 0);
+            int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_action_text_color, 0);
             //全局设置
             if (0 == actionTextColor) {
                 actionTextColor = defaultActionTextColor;
@@ -306,20 +306,20 @@ public class TitleBar extends Toolbar {
             viewBinding.tvAction.setTextColor(actionTextColor);
             //右侧文字大小
             int actionTextSizeDefault = getResources().getDimensionPixelSize(R.dimen.action_text_size);
-            int actionTextSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_tb_text_action_text_size, actionTextSizeDefault);
+            int actionTextSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_tb_action_text_size, actionTextSizeDefault);
             viewBinding.tvAction.setTextSize(TypedValue.COMPLEX_UNIT_PX, actionTextSize);
         } else {
             viewBinding.tvAction.setVisibility(View.GONE);
         }
         //右侧事件图片
-        Drawable actionIcon = typedArray.getDrawable(R.styleable.TitleBar_tb_icon_action);
+        Drawable actionIcon = typedArray.getDrawable(R.styleable.TitleBar_tb_action_icon);
         if (null != actionIcon) {
             viewBinding.ivAction.setVisibility(View.VISIBLE);
             viewBinding.ivAction.setBackground(actionIcon);
             //图片宽度
-            int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_width, ToolsUtils.dip2px(context, 20));
+            int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_icon_width, ToolsUtils.dip2px(context, 20));
             //图片高度
-            int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_icon_action_height, ToolsUtils.dip2px(context, 20));
+            int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_icon_height, ToolsUtils.dip2px(context, 20));
             //设置图片尺寸
             ToolsUtils.setViewSize(viewBinding.ivAction, iconWidth, iconHeight);
         } else {
@@ -330,10 +330,10 @@ public class TitleBar extends Toolbar {
         if (null != btnDrawable) {
             viewBinding.btnAction.setBackground(btnDrawable);
         }
-        //右侧按钮图片与文字均未设置，则隐藏按钮
-        if (TextUtils.isEmpty(actionText) && null == actionIcon && null == btnDrawable) {
-            viewBinding.btnAction.setVisibility(View.GONE);
-        } else {
+        //右侧按钮图片与文字均未设置，则默认为按钮隐藏按钮
+        boolean defaultActionVisible = !TextUtils.isEmpty(actionText) || null != actionIcon || null != btnDrawable;
+        boolean actionVisible = typedArray.getBoolean(R.styleable.TitleBar_tb_action_visible, defaultActionVisible);
+        if (actionVisible) {
             viewBinding.btnAction.setVisibility(View.VISIBLE);
             //按钮宽度
             int btnWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_width, 0);
@@ -348,6 +348,8 @@ public class TitleBar extends Toolbar {
             //按钮与右边距
             int div = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_marginEnd, 0);
             ToolsUtils.setViewSize(viewBinding.btnAction, btnWidth, btnHeight, div);
+        } else {
+            viewBinding.btnAction.setVisibility(View.GONE);
         }
         /******分割线是否显示*******/
         //xml中设置
