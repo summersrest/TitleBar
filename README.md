@@ -18,7 +18,7 @@ allprojects {
 ```
 2.添加
 ```java
-implementation 'com.github.summersrest:TitleBar:v1.0.7'
+implementation 'com.github.summersrest:TitleBar:v1.0.8'
 ```
 ## **2、使用**
 ### 1、xml中使用
@@ -40,17 +40,18 @@ implementation 'com.github.summersrest:TitleBar:v1.0.7'
         app:tb_divider_drawable="@drawable/line"
         app:tb_divider_size="2dp"
         app:tb_divider_visible="visible"
-        app:tb_icon_action="@mipmap/glass_gray"
-        app:tb_icon_action_height="10dp"
-        app:tb_icon_action_width="10dp"
+        app:tb_action_icon="@mipmap/glass_gray"
+        app:tb_action_icon_height="10dp"
+        app:tb_action_icon_width="10dp"
         app:tb_icon_back="@mipmap/back"
         app:tb_icon_back_height="20dp"
         app:tb_icon_back_width="30dp"
-        app:tb_text_action="保存"
-        app:tb_text_action_color="@color/red"
-        app:tb_text_action_text_size="14sp"
+        app:tb_action_text="保存"
+        app:tb_action_text_color="@color/red"
+        app:tb_action_text_size="14sp"
         app:tb_text_back="返回"
         app:tb_title="标题"
+        app:tb_title_bar_size="60dp"
         app:tb_title_color="@color/black"
         app:tb_title_text_size="18sp" />
 ```
@@ -61,23 +62,24 @@ implementation 'com.github.summersrest:TitleBar:v1.0.7'
 | tb_background_drawable  | reference  |titleBar背景图(覆盖背景色)
 | tb_background_alpha | integer  |titleBar背景透明度(0~255)
 | tb_title_bar_size | dimension  |标题栏高度（不包括分割线高度，与分割线高度分别计算）
-| tb_icon_back | reference  |回退按钮图片
-| tb_icon_back_width | dimension  |回退按钮图片宽度
-| tb_icon_back_height | dimension  |回退按钮图片高度
-| tb_text_back | string  |回退按钮文字
+| tb_back_icon | reference  |回退按钮图片
+| tb_back_icon_width | dimension  |回退按钮图片宽度
+| tb_back_icon_height | dimension  |回退按钮图片高度
+| tb_back_text | string  |回退按钮文字
 | tb_title | string  |标题文字
 | tb_title_color | color  |标题文字颜色
 | tb_title_text_size | dimension  |标题文字字体大小
-| tb_text_action | string  |右侧按钮文字
-| tb_text_action_color | color  |右侧按钮文字颜色
-| tb_text_action_text_size | dimension  |右侧按钮文字大小
+| tb_action_visible | boolean  |右侧按钮是否显示(默认不显示，设置了按钮图片或者文字后默认为显示可不设置)
+| tb_action_text | string  |右侧按钮文字
+| tb_action_text_color | color  |右侧按钮文字颜色
+| tb_action_text_size | dimension  |右侧按钮文字大小
 | tb_action_width | dimension  |右侧按钮宽度
 | tb_action_height | dimension  |右侧按钮高度
 | tb_action_marginEnd | dimension  |右侧按钮距离右边侧距离
 | tb_action_background | reference  |右侧按钮背景
-| tb_icon_action | reference  |右侧按钮内部显示图片
-| tb_icon_action_width | dimension  |右侧按钮图片宽度
-| tb_icon_action_height | dimension  |右侧按钮图片高度
+| tb_action_icon | reference  |右侧按钮内部显示图片
+| tb_action_icon_width | dimension  |右侧按钮图片宽度
+| tb_action_icon_height | dimension  |右侧按钮图片高度
 | tb_divider_color | color  |底部分割线颜色
 | tb_divider_drawable | reference  |底部分割线背景图（覆盖背景色）
 | tb_divider_size | dimension  |底部分割线高度
@@ -203,6 +205,7 @@ TitleBar.getDefaultBuilder()
 > 2、样式设置优先级：代码>xml>全局。代码中未设置样式属性，以xml中设置的样式为准，代码与xml中都未设置，以Applicaion中设置的全局默认样式属性为准。  
 > 3、标题栏的整体高度为 标题栏高度+分割线高度，即整体高度为 **tb_title_bar_size + tb_divider_size**   
 > 4、标题栏tb_title_bar_size的默认高度为60dp，假如设置的整体高度小于等于60dp，并且未指定tb_title_bar_size的高度，分割线会被覆盖掉无法显示，解决办法是指定TitleBar的整体高度-tb_title_bar_size高度=分割线的高度。或者将TitleBar的高度设置为wrap_content。  
+> 5、右侧按钮默认为不显示，当设置过按钮图片或者文字后，程序会自动将其设置为显示状态，无需手动更改。
 
 ```xml
 <com.sum.titlebar.TitleBar
