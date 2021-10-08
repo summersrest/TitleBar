@@ -1,6 +1,5 @@
 package com.sum.titlebar;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -21,7 +20,6 @@ import androidx.appcompat.widget.Toolbar;
  * Desc: 自定义title
  */
 public class TitleBar extends Toolbar {
-    private static final String TAG = "green";
     private ViewTitleBarBinding viewBinding;
     /**
      * 分割线显示
