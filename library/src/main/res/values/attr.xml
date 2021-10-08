@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TitleBar">
-        <!-- titleBar背景色 -->
+        <!-- 标题栏背景色 -->
         <attr name="tb_background_color" format="reference|color|integer" />
-        <!-- titleBar背景图 -->
+        <!-- 标题栏背景图 -->
         <attr name="tb_background_drawable" format="reference"/>
-        <!-- titleBar背景透明度 -->
+        <!-- 标题栏背景透明度 -->
         <attr name="tb_background_alpha" format="integer"/>
         <!-- 标题栏高度（不包括分割线高度，与分割线高度分别计算） -->
         <attr name="tb_title_bar_size" format="dimension"/>
         <!-- 回退按钮图片 -->
-        <attr name="tb_icon_back" format="reference" />
+        <attr name="tb_back_icon" format="reference" />
         <!-- 回退按钮图片宽度 -->
-        <attr name="tb_icon_back_width" format="dimension" />
+        <attr name="tb_back_icon_width" format="dimension" />
         <!-- 回退按钮图片高度 -->
-        <attr name="tb_icon_back_height" format="dimension" />
+        <attr name="tb_back_icon_height" format="dimension" />
         <!-- 回退按钮文字 -->
-        <attr name="tb_text_back" format="string" />
+        <attr name="tb_back_text" format="string" />
         <!-- 标题文字 -->
         <attr name="tb_title" format="string" />
         <!-- 标题文字颜色 -->
         <attr name="tb_title_color" format="reference|color|integer"/>
         <!-- 标题文字字体大小 -->
         <attr name="tb_title_text_size" format="dimension"/>
-        <!-- 右侧事件文字 -->
-        <attr name="tb_text_action" format="string" />
-        <!-- 右侧事件文字颜色 -->
-        <attr name="tb_text_action_color" format="reference|color|integer"/>
-        <!-- 右侧事件文字字体大小 -->
-        <attr name="tb_text_action_text_size" format="dimension"/>
-        <!-- 右侧事件图片 -->
-        <attr name="tb_icon_action" format="reference" />
-        <!-- 右侧事件图片宽度 -->
-        <attr name="tb_icon_action_width" format="dimension" />
-        <!-- 右侧事件图片高度 -->
-        <attr name="tb_icon_action_height" format="dimension" />
+        <!-- 右侧按钮是否显示 -->
+        <attr name="tb_action_visible" format="boolean" />
+        <!-- 右侧按钮文字 -->
+        <attr name="tb_action_text" format="string" />
+        <!-- 右侧按钮文字颜色 -->
+        <attr name="tb_action_text_color" format="reference|color|integer"/>
+        <!-- 右侧按钮文字字体大小 -->
+        <attr name="tb_action_text_size" format="dimension"/>
+        <!-- 右侧按钮图片 -->
+        <attr name="tb_action_icon" format="reference" />
+        <!-- 右侧按钮图片宽度 -->
+        <attr name="tb_action_icon_width" format="dimension" />
+        <!-- 右侧按钮图片高度 -->
+        <attr name="tb_action_icon_height" format="dimension" />
         <!-- 右侧按钮宽度 -->
         <attr name="tb_action_width" format="dimension" />
         <!-- 右侧按钮高度 -->
