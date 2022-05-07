@@ -18,12 +18,12 @@ allprojects {
 ```
 2.添加
 ```java
-implementation 'com.github.summersrest:TitleBar:v1.0.9'
+implementation 'com.github.summersrest:TitleBar:v1.1.0'
 ```
 ## **2、使用**
 ### 1、xml中使用
 ```xml
-<com.sum.titlebar.TitleBar
+    <com.sum.titlebar.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,13 +43,13 @@ implementation 'com.github.summersrest:TitleBar:v1.0.9'
         app:tb_action_icon="@mipmap/glass_gray"
         app:tb_action_icon_height="10dp"
         app:tb_action_icon_width="10dp"
-        app:tb_icon_back="@mipmap/back"
-        app:tb_icon_back_height="20dp"
-        app:tb_icon_back_width="30dp"
+        app:tb_back_icon="@mipmap/back"
+        app:tb_back_icon_height="20dp"
+        app:tb_back_icon_width="30dp"
         app:tb_action_text="保存"
         app:tb_action_text_color="@color/red"
         app:tb_action_text_size="14sp"
-        app:tb_text_back="返回"
+        app:tb_back_text="返回"
         app:tb_title="标题"
         app:tb_title_bar_size="60dp"
         app:tb_title_color="@color/black"
