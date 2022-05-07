@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
 import com.sum.titlebar.databinding.ViewTitleBarBinding;
+
 import androidx.appcompat.widget.Toolbar;
 
 /**
@@ -287,39 +289,39 @@ public class TitleBar extends Toolbar {
         }
         //右侧事件文字
         String actionText = typedArray.getString(R.styleable.TitleBar_tb_action_text);
+        //右侧文字颜色
+        //xml设置
+        int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_action_text_color, 0);
+        //全局设置
+        if (0 == actionTextColor) {
+            actionTextColor = defaultActionTextColor;
+        }
+        //均未设置
+        if (0 == actionTextColor) {
+            actionTextColor = Color.parseColor("#22293A");
+        }
+        viewBinding.tvAction.setTextColor(actionTextColor);
+        //右侧文字大小
+        int actionTextSizeDefault = getResources().getDimensionPixelSize(R.dimen.action_text_size);
+        int actionTextSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_tb_action_text_size, actionTextSizeDefault);
+        viewBinding.tvAction.setTextSize(TypedValue.COMPLEX_UNIT_PX, actionTextSize);
         if (!TextUtils.isEmpty(actionText)) {
             viewBinding.tvAction.setVisibility(View.VISIBLE);
             viewBinding.tvAction.setText(actionText);
-            //右侧文字颜色
-            //xml设置
-            int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_action_text_color, 0);
-            //全局设置
-            if (0 == actionTextColor) {
-                actionTextColor = defaultActionTextColor;
-            }
-            //均未设置
-            if (0 == actionTextColor) {
-                actionTextColor = Color.parseColor("#22293A");
-            }
-            viewBinding.tvAction.setTextColor(actionTextColor);
-            //右侧文字大小
-            int actionTextSizeDefault = getResources().getDimensionPixelSize(R.dimen.action_text_size);
-            int actionTextSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_tb_action_text_size, actionTextSizeDefault);
-            viewBinding.tvAction.setTextSize(TypedValue.COMPLEX_UNIT_PX, actionTextSize);
         } else {
             viewBinding.tvAction.setVisibility(View.GONE);
         }
         //右侧事件图片
         Drawable actionIcon = typedArray.getDrawable(R.styleable.TitleBar_tb_action_icon);
+        //图片宽度
+        int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_icon_width, ToolsUtils.dip2px(context, 20));
+        //图片高度
+        int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_icon_height, ToolsUtils.dip2px(context, 20));
+        //设置图片尺寸
+        ToolsUtils.setViewSize(viewBinding.ivAction, iconWidth, iconHeight);
         if (null != actionIcon) {
             viewBinding.ivAction.setVisibility(View.VISIBLE);
             viewBinding.ivAction.setBackground(actionIcon);
-            //图片宽度
-            int iconWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_icon_width, ToolsUtils.dip2px(context, 20));
-            //图片高度
-            int iconHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_icon_height, ToolsUtils.dip2px(context, 20));
-            //设置图片尺寸
-            ToolsUtils.setViewSize(viewBinding.ivAction, iconWidth, iconHeight);
         } else {
             viewBinding.ivAction.setVisibility(View.GONE);
         }
@@ -328,24 +330,25 @@ public class TitleBar extends Toolbar {
         if (null != btnDrawable) {
             viewBinding.btnAction.setBackground(btnDrawable);
         }
+
+        //按钮宽度
+        int btnWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_width, 0);
+        if (0 == btnWidth) {
+            btnWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
+        }
+        //按钮高度
+        int btnHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_height, 0);
+        if (0 == btnHeight) {
+            btnHeight = ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+        //按钮与右边距
+        int div = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_marginEnd, 0);
+        ToolsUtils.setViewSize(viewBinding.btnAction, btnWidth, btnHeight, div);
         //右侧按钮图片与文字均未设置，则默认为按钮隐藏按钮
         boolean defaultActionVisible = !TextUtils.isEmpty(actionText) || null != actionIcon || null != btnDrawable;
         boolean actionVisible = typedArray.getBoolean(R.styleable.TitleBar_tb_action_visible, defaultActionVisible);
         if (actionVisible) {
             viewBinding.btnAction.setVisibility(View.VISIBLE);
-            //按钮宽度
-            int btnWidth = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_width, 0);
-            if (0 == btnWidth) {
-                btnWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
-            }
-            //按钮高度
-            int btnHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_height, 0);
-            if (0 == btnHeight) {
-                btnHeight = ViewGroup.LayoutParams.MATCH_PARENT;
-            }
-            //按钮与右边距
-            int div = (int) typedArray.getDimension(R.styleable.TitleBar_tb_action_marginEnd, 0);
-            ToolsUtils.setViewSize(viewBinding.btnAction, btnWidth, btnHeight, div);
         } else {
             viewBinding.btnAction.setVisibility(View.GONE);
         }
@@ -526,6 +529,7 @@ public class TitleBar extends Toolbar {
      */
     public TitleBar setActionText(String text) {
         viewBinding.tvAction.setText(text);
+        viewBinding.tvAction.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -548,6 +552,7 @@ public class TitleBar extends Toolbar {
      */
     public TitleBar setActionIcon(Drawable drawable) {
         viewBinding.ivAction.setBackground(drawable);
+        viewBinding.ivAction.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -559,6 +564,7 @@ public class TitleBar extends Toolbar {
      */
     public TitleBar setActionIconResource(int resource) {
         viewBinding.ivAction.setBackgroundResource(resource);
+        viewBinding.ivAction.setVisibility(View.VISIBLE);
         return this;
     }
 
