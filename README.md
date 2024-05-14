@@ -9,21 +9,23 @@
 ## **1、导入**
  1.引入jitpack
  ```java
-allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://www.jitpack.io")}
+    }
+}
 ```
 2.添加
 ```java
-implementation 'com.github.summersrest:TitleBar:v1.1.0'
+implementation 'com.github.summersrest:TitleBar:v1.1.1'
 ```
 ## **2、使用**
 ### 1、xml中使用
 ```xml
-    <com.sum.titlebar.TitleBar
+    <com.sum.title_bar.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -208,7 +210,7 @@ TitleBar.getDefaultBuilder()
 > 5、右侧按钮默认为不显示，当设置过按钮图片或者文字后，程序会自动将其设置为显示状态，无需手动更改。
 
 ```xml
-<com.sum.titlebar.TitleBar
+<com.sum.title_bar.TitleBar
 	android:id="@+id/title_bar"
 	android:layout_width="match_parent"
 	android:layout_height="61dp"
@@ -217,7 +219,7 @@ TitleBar.getDefaultBuilder()
 ```
 或者
 ```xml
-<com.sum.titlebar.TitleBar
+<com.sum.title_bar.TitleBar
 	android:id="@+id/title_bar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"/>
