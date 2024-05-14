@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.sum.titlebar.TitleBar
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.sum.title_bar.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +23,7 @@
         app:tb_action_icon="@mipmap/glass_gray"
         app:tb_action_icon_height="10dp"
         app:tb_action_icon_width="10dp"
-        app:tb_back_icon="@mipmap/back"
+        app:tb_back_icon="@mipmap/icon_back_white"
         app:tb_back_icon_height="20dp"
         app:tb_back_icon_width="30dp"
         app:tb_action_text="保存"
@@ -37,6 +34,4 @@
         app:tb_title_bar_size="60dp"
         app:tb_title_color="@color/black"
         app:tb_title_text_size="18sp" />
-
-
 </LinearLayout>
