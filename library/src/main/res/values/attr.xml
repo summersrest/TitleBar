@@ -17,6 +17,10 @@
         <attr name="tb_back_icon_height" format="dimension" />
         <!-- 回退按钮文字 -->
         <attr name="tb_back_text" format="string" />
+        <!-- 回退按钮文字颜色 -->
+        <attr name="tb_back_text_color" format="reference|color|integer"/>
+        <!-- 回退按钮文字大小 -->
+        <attr name="tb_back_text_size" format="dimension"/>
         <!-- 标题文字 -->
         <attr name="tb_title" format="string" />
         <!-- 标题文字颜色 -->
