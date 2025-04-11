@@ -24,9 +24,9 @@ public class App extends Application {
                 //标题栏背景图（会覆盖背景色）
 //                .setTitleBarBackground(ContextCompat.getDrawable(this, R.drawable.title_background))
                 //标题字体颜色
-                .setTitleTextColor(getColor(R.color.white))
+                .setTitleTextColor(ContextCompat.getColor(this, R.color.purple_500))
                 //右侧按钮字体颜色
-                .setActionTextColor(R.color.black)
+                .setActionTextColor(ContextCompat.getColor(this, R.color.purple_500))
                 //底部分割线颜色
                 .setDividerColor(ContextCompat.getColor(this, R.color.red))
                 //底部分割线背景图（会覆盖背景颜色）

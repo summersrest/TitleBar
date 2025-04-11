@@ -30,7 +30,7 @@
         <!-- 标题文字 -->
         <attr name="tb_title" format="string" />
         <!-- 标题文字颜色 -->
-        <attr name="tb_title_color" format="reference|color|integer"/>
+        <attr name="tb_title_text_color" format="reference|color|integer"/>
         <!-- 标题文字字体大小 -->
         <attr name="tb_title_text_size" format="dimension"/>
         <!-- 右侧按钮是否显示 -->

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.sum.title_bar.databinding.ViewTitleBarBinding;
 
@@ -63,7 +64,7 @@ public class TitleBar extends Toolbar {
     /**
      * 全局默认返回文字颜色
      */
-    private static int defaultBackTextColor = -1;
+    private static int defaultBackTextColor = Color.parseColor("#22293A");
 
     /**
      * 全局默认返回文字尺寸
@@ -73,7 +74,7 @@ public class TitleBar extends Toolbar {
     /**
      * 全局默认标题文字颜色
      */
-    private static int defaultTitleColor = -1;
+    private static int defaultTitleTextColor = Color.parseColor("#22293A");
 
     /**
      * 全局默认标题文字尺寸
@@ -83,7 +84,7 @@ public class TitleBar extends Toolbar {
     /**
      * 全局默认右侧按钮文字颜色
      */
-    private static int defaultActionTextColor = -1;
+    private static int defaultActionTextColor = Color.parseColor("#22293A");
 
     /**
      * 全局默认右侧按钮文字尺寸
@@ -215,11 +216,7 @@ public class TitleBar extends Toolbar {
             setBackgroundColor(backgroundColor);
         }
         //背景透明度
-        int alpha = typedArray.getInteger(R.styleable.TitleBar_tb_background_alpha, -1);
-        //若未设置，取全局默认的透明度
-        if (alpha == -1) {
-            alpha = defaultBackgroundAlpha;
-        }
+        int alpha = typedArray.getInteger(R.styleable.TitleBar_tb_background_alpha, defaultBackgroundAlpha);
         getBackground().mutate().setAlpha(alpha);
 
         //标题栏高度
@@ -293,15 +290,7 @@ public class TitleBar extends Toolbar {
         viewBinding.tvBack.setText(backText);
         /******回退按钮文字颜色*******/
         //xml中取值
-        int backTextColor = typedArray.getColor(R.styleable.TitleBar_tb_back_text_color, -1);
-        //全局设置
-        if (-1 == backTextColor) {
-            backTextColor = defaultBackTextColor;
-        }
-        //均未设置
-        if (-1 == backTextColor) {
-            backTextColor = Color.parseColor("#22293A");
-        }
+        int backTextColor = typedArray.getColor(R.styleable.TitleBar_tb_back_text_color, defaultBackTextColor);
         viewBinding.tvBack.setTextColor(backTextColor);
 
         /******回退按钮文字大小*******/
@@ -388,15 +377,7 @@ public class TitleBar extends Toolbar {
             }
             /******标题文字颜色*******/
             //xml中取值
-            int titleColor = typedArray.getColor(R.styleable.TitleBar_tb_title_color, -1);
-            //全局设置
-            if (-1 == titleColor) {
-                titleColor = defaultTitleColor;
-            }
-            //均未设置
-            if (-1 == titleColor) {
-                titleColor = Color.parseColor("#22293A");
-            }
+            int titleColor = typedArray.getColor(R.styleable.TitleBar_tb_title_text_color, defaultTitleTextColor);
             viewBinding.tvTitle.setTextColor(titleColor);
             /******标题文字大小*******/
             int titleTextSizeDefault = defaultTitleTextSize == 0 ?
@@ -417,15 +398,8 @@ public class TitleBar extends Toolbar {
         String actionText = typedArray.getString(R.styleable.TitleBar_tb_action_text);
         //右侧文字颜色
         //xml设置
-        int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_action_text_color, -1);
+        int actionTextColor = typedArray.getColor(R.styleable.TitleBar_tb_action_text_color, defaultActionTextColor);
         //全局设置
-        if (-1 == actionTextColor) {
-            actionTextColor = defaultActionTextColor;
-        }
-        //均未设置
-        if (-1 == actionTextColor) {
-            actionTextColor = Color.parseColor("#22293A");
-        }
         viewBinding.tvAction.setTextColor(actionTextColor);
         //右侧文字大小
         int actionTextSizeDefault = defaultActionTextSize == 0 ?
@@ -969,7 +943,7 @@ public class TitleBar extends Toolbar {
          * @return
          */
         public DefaultBuilder setTitleTextColor(int color) {
-            defaultTitleColor = color;
+            defaultTitleTextColor = color;
             return this;
         }
 
