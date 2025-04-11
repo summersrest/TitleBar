@@ -20,7 +20,7 @@ dependencyResolutionManagement {
 ```
 2.添加
 ```java
-implementation 'com.github.summersrest:TitleBar:v1.1.1'
+implementation 'com.github.summersrest:TitleBar:v1.1.4'
 ```
 ## **2、使用**
 ### 1、xml中使用
