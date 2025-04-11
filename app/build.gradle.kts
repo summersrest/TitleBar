@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.sum.sample_title_bar"
-        minSdk = 24
+        minSdk = 27
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"

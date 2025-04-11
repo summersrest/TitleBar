@@ -155,48 +155,6 @@ public class TitleBar extends Toolbar {
         super(context, attrs, defStyleAttr);
     }
 
-    /**
-     * 设置底部分割线相关属性
-     *
-     * @param context
-     * @param typedArray
-     */
-    private void setDivider(Context context, TypedArray typedArray) {
-        /******分割线是否显示*******/
-        //xml中读取不到，从全局读取
-        int visible = typedArray.getInt(R.styleable.TitleBar_tb_divider_visible, defaultDriverVisible);
-        viewBinding.iconLine.setVisibility(visible);
-        if (visible == View.VISIBLE) {
-            /******分割线图片*******/
-            //xml中设置
-            Drawable lineDrawable = typedArray.getDrawable(R.styleable.TitleBar_tb_divider_drawable);
-            //全局设置
-            if (null == lineDrawable) {
-                lineDrawable = defaultDividerDrawable;
-            }
-            if (null != lineDrawable) {
-                viewBinding.iconLine.setBackground(lineDrawable);
-            } else {
-                /******分割线图片*******/
-//                int lineColor = typedArray.getColor(R.styleable.TitleBar_tb_divider_color, Color.parseColor("#EFEFEF"));
-                //xml中读取不到，显示全局设置的颜色
-                int lineColor = typedArray.getColor(R.styleable.TitleBar_tb_divider_color, defaultDividerColor);
-                viewBinding.iconLine.setBackgroundColor(lineColor);
-            }
-            /********分割线高度********/
-            //xml中未设置，读取全局默认值
-            int dividerHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_divider_size,
-                    ToolsUtils.dip2px(context, defaultDividerSize == 0 ? 1f : defaultDividerSize));
-            //设置分割线高度
-            ToolsUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
-        } else {
-            viewBinding.iconLine.setVisibility(View.GONE);
-        }
-        //分割线透明度
-        int alphaDivider = typedArray.getInteger(R.styleable.TitleBar_tb_divider_alpha, defaultDividerAlpha);
-        viewBinding.iconLine.getBackground().mutate().setAlpha(alphaDivider);
-
-    }
 
     private void initView(Context context, AttributeSet attrs) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -352,6 +310,9 @@ public class TitleBar extends Toolbar {
         float titleTextSize = typedArray.getDimension(R.styleable.TitleBar_tb_title_text_size, titleTextSizeDefault);
         viewBinding.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
 
+        //返回按钮是否显示
+        int visible = typedArray.getInt(R.styleable.TitleBar_tb_back_button_visible, View.VISIBLE);
+        viewBinding.btnBack.setVisibility(visible);
 
         //点击返回按钮是否关闭当前activity
         autoFinishAct = typedArray.getBoolean(R.styleable.TitleBar_tb_can_finish_activity, true);
@@ -527,6 +488,50 @@ public class TitleBar extends Toolbar {
             }
         });
     }
+
+    /**
+     * 设置底部分割线相关属性
+     *
+     * @param context
+     * @param typedArray
+     */
+    private void setDivider(Context context, TypedArray typedArray) {
+        /******分割线是否显示*******/
+        //xml中读取不到，从全局读取
+        int visible = typedArray.getInt(R.styleable.TitleBar_tb_divider_visible, defaultDriverVisible);
+        viewBinding.iconLine.setVisibility(visible);
+        if (visible == View.VISIBLE) {
+            /******分割线图片*******/
+            //xml中设置
+            Drawable lineDrawable = typedArray.getDrawable(R.styleable.TitleBar_tb_divider_drawable);
+            //全局设置
+            if (null == lineDrawable) {
+                lineDrawable = defaultDividerDrawable;
+            }
+            if (null != lineDrawable) {
+                viewBinding.iconLine.setBackground(lineDrawable);
+            } else {
+                /******分割线图片*******/
+//                int lineColor = typedArray.getColor(R.styleable.TitleBar_tb_divider_color, Color.parseColor("#EFEFEF"));
+                //xml中读取不到，显示全局设置的颜色
+                int lineColor = typedArray.getColor(R.styleable.TitleBar_tb_divider_color, defaultDividerColor);
+                viewBinding.iconLine.setBackgroundColor(lineColor);
+            }
+            /********分割线高度********/
+            //xml中未设置，读取全局默认值
+            int dividerHeight = (int) typedArray.getDimension(R.styleable.TitleBar_tb_divider_size,
+                    ToolsUtils.dip2px(context, defaultDividerSize == 0 ? 1f : defaultDividerSize));
+            //设置分割线高度
+            ToolsUtils.setViewSize(viewBinding.iconLine, ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
+        } else {
+            viewBinding.iconLine.setVisibility(View.GONE);
+        }
+        //分割线透明度
+        int alphaDivider = typedArray.getInteger(R.styleable.TitleBar_tb_divider_alpha, defaultDividerAlpha);
+        viewBinding.iconLine.getBackground().mutate().setAlpha(alphaDivider);
+
+    }
+
 
     /**
      * 设置标题栏背景颜色
