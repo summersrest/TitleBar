@@ -19,14 +19,15 @@ public class App extends Application {
                 .setBackIconHeight(20)
                 //返回文字
                 .setBackText("返回")
+                .setBackTextSize(16)
                 //标题栏背景颜色
                 .setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                 //标题栏背景图（会覆盖背景色）
 //                .setTitleBarBackground(ContextCompat.getDrawable(this, R.drawable.title_background))
-                //标题字体颜色
-                .setTitleTextColor(ContextCompat.getColor(this, R.color.purple_500))
-                //右侧按钮字体颜色
-                .setActionTextColor(ContextCompat.getColor(this, R.color.purple_500))
+//                //标题字体颜色
+//                .setTitleTextColor(ContextCompat.getColor(this, R.color.white))
+//                //右侧按钮字体颜色
+//                .setActionTextColor(ContextCompat.getColor(this, R.color.white))
                 //底部分割线颜色
                 .setDividerColor(ContextCompat.getColor(this, R.color.red))
                 //底部分割线背景图（会覆盖背景颜色）

@@ -294,10 +294,10 @@ public class TitleBar extends Toolbar {
         viewBinding.tvBack.setTextColor(backTextColor);
 
         /******回退按钮文字大小*******/
-        int titleTextSizeDefault = defaultBackTextSize == 0 ?
+        int backTextSizeDefault = defaultBackTextSize == 0 ?
                 getResources().getDimensionPixelSize(R.dimen.title_text_size) : defaultBackTextSize;
-        float titleTextSize = typedArray.getDimension(R.styleable.TitleBar_tb_title_text_size, titleTextSizeDefault);
-        viewBinding.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
+        float backTextSize = typedArray.getDimension(R.styleable.TitleBar_tb_back_text_size, backTextSizeDefault);
+        viewBinding.tvBack.setTextSize(TypedValue.COMPLEX_UNIT_PX, backTextSize);
 
         //返回按钮是否显示
         int visible = typedArray.getInt(R.styleable.TitleBar_tb_back_button_visible, View.VISIBLE);
@@ -1059,6 +1059,7 @@ public class TitleBar extends Toolbar {
 
         /**
          * 设置全局默认分割线透明度
+         *
          * @param alpha
          * @return
          */

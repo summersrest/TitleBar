@@ -31,6 +31,7 @@
         app:tb_action_text_size="14sp"
         app:tb_back_text="返回"
         app:tb_title="标题"
+        app:tb_title_text_color="@color/white"
         app:tb_title_bar_size="60dp"
         app:tb_title_text_size="18sp" />
 </LinearLayout>
